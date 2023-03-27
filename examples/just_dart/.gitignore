@@ -48,3 +48,6 @@ web/
 .packages
 pubspec.lock
 .fvm/flutter_sdk
+
+
+server
