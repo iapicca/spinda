@@ -23,4 +23,10 @@ cd
 [spin]: https://github.com/fermyon/spin
 [dart]: https://github.com/dart-lang
 
-- 
+- install dart
+
+```console
+brew install dart-sdk
+echo 'export PATH="$PATH":export PATH="$PATH":"$HOME/.pub-cache/bin"'>> ~/.zshrc
+source ~/.zshrc
+```
