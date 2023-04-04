@@ -1,0 +1,14 @@
+name: spin_http
+description: A new Flutter FFI plugin project.
+version: 0.0.1
+homepage: none
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+# dependencies:
+
+dev_dependencies:
+  ffi: ^2.0.1
+  ffigen: ^6.1.2
+  lints: ^2.0.1
