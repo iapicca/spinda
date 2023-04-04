@@ -12,49 +12,110 @@ typedef SpinHttpRequest = UnnamedStruct7;
 typedef SpinHttpHeadersOptionHeaders = UnnamedStruct8;
 typedef SpinHttpResponse = UnnamedStruct9;
 
-const _libName = 'spin_http';
+const _library = 'spin_http';
 
-final _bindings = SpinHttpBindings(DynamicLibrary.open('lib$_libName.so'));
+abstract class SpinHttp {
+  static final _binding = SpinHttpBindings(
+    DynamicLibrary.open(
+      'lib$_library.so',
+    ),
+  );
 
-void spinHttpBody(Pointer<SpinHttpBody> body) =>
-    _bindings.spin_http_body_free(body);
+  static void body(
+    Pointer<SpinHttpBody> body,
+  ) =>
+      _binding.spin_http_body_free(
+        body,
+      );
 
-void spinHttpHandleHttpRequest(
-  Pointer<SpinHttpRequest> request,
-  Pointer<SpinHttpResponse> response,
-) =>
-    _bindings.spin_http_handle_http_request(request, response);
+  static void handleRequest(
+    Pointer<SpinHttpRequest> request,
+    Pointer<SpinHttpResponse> response,
+  ) =>
+      _binding.spin_http_handle_http_request(
+        request,
+        response,
+      );
 
-void spinHttpHeaders(Pointer<SpinHttpHeaders> headers) =>
-    _bindings.spin_http_headers_free(headers);
+  static void headers(
+    Pointer<SpinHttpHeaders> headers,
+  ) =>
+      _binding.spin_http_headers_free(
+        headers,
+      );
 
-void spinHttpOptionBody(Pointer<SpinHttpHeadersOptionBody> optionBody) =>
-    _bindings.spin_http_option_body_free(optionBody);
+  static void optionBody(
+    Pointer<SpinHttpHeadersOptionBody> optionBody,
+  ) =>
+      _binding.spin_http_option_body_free(
+        optionBody,
+      );
 
-void spinHttpOptionHeaders(Pointer<UnnamedStruct8> optionHeaders) =>
-    _bindings.spin_http_option_headers_free(optionHeaders);
+  static void optionHeader(
+    Pointer<UnnamedStruct8> optionHeaders,
+  ) =>
+      _binding.spin_http_option_headers_free(
+        optionHeaders,
+      );
 
-void spinHttpOptionParams(Pointer<SpinHttpHeadersParams> params) =>
-    _bindings.spin_http_params_free(params);
+  static void optionParams(
+    Pointer<SpinHttpHeadersParams> params,
+  ) =>
+      _binding.spin_http_params_free(
+        params,
+      );
 
-void spinHttpRequest(Pointer<SpinHttpRequest> request) =>
-    _bindings.spin_http_request_free(request);
+  static void request(
+    Pointer<SpinHttpRequest> request,
+  ) =>
+      _binding.spin_http_request_free(
+        request,
+      );
 
-void spinHttpResponse(Pointer<SpinHttpResponse> response) =>
-    _bindings.spin_http_response_free(response);
+  static void response(
+    Pointer<SpinHttpResponse> response,
+  ) =>
+      _binding.spin_http_response_free(
+        response,
+      );
 
-/// is it duplicate?
-void spinHttpStringDuplicate(Pointer<SpinHttpString> ret, Pointer<Char> s) =>
-    _bindings.spin_http_string_dup(ret, s);
+  /// is it duplicate?
+  static void stringDuplicate(
+    Pointer<SpinHttpString> ret,
+    Pointer<Char> s,
+  ) =>
+      _binding.spin_http_string_dup(
+        ret,
+        s,
+      );
 
-void spinHttpString(Pointer<SpinHttpString> ret) =>
-    _bindings.spin_http_string_free(ret);
+  static void string(
+    Pointer<SpinHttpString> ret,
+  ) =>
+      _binding.spin_http_string_free(
+        ret,
+      );
 
-void spinHttpStringSet(Pointer<SpinHttpString> ret, Pointer<Char> s) =>
-    _bindings.spin_http_string_set(ret, s);
+  static void stringSet(
+    Pointer<SpinHttpString> ret,
+    Pointer<Char> s,
+  ) =>
+      _binding.spin_http_string_set(
+        ret,
+        s,
+      );
 
-void spinHttpTuple(Pointer<SpinHttpTuple2> tuple) =>
-    _bindings.spin_http_tuple2_string_string_free(tuple);
+  static void tuple(
+    Pointer<SpinHttpTuple2> tuple,
+  ) =>
+      _binding.spin_http_tuple2_string_string_free(
+        tuple,
+      );
 
-void spinHttpUri(Pointer<SpinHttpString> string) =>
-    _bindings.spin_http_uri_free(string);
+  static void uri(
+    Pointer<SpinHttpString> string,
+  ) =>
+      _binding.spin_http_uri_free(
+        string,
+      );
+}

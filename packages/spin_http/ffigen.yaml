@@ -1,19 +1,22 @@
 # Run with `flutter pub run ffigen --config ffigen.yaml`.
 name: SpinHttpBindings
 description: |
-  Bindings for `src/spin_http.h`.
+  Bindings for `src/spin_http.h` and `'src/wasi-outbound-http.h'`.
 
   Regenerate bindings with `flutter pub run ffigen --config ffigen.yaml`.
 output: 'lib/spin_http_bindings_generated.dart'
 headers:
   entry-points:
     - 'src/spin-http.h'
+    - 'src/wasi-outbound-http.h'
   include-directives:
     - 'src/spin-http.h'
+    - 'src/wasi-outbound-http.h'
 preamble: |
   // ignore_for_file: always_specify_types
   // ignore_for_file: camel_case_types
   // ignore_for_file: non_constant_identifier_names
+
 comments:
   style: any
   length: full
