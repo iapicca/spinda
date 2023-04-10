@@ -53,4 +53,5 @@ void Function(HttpString ret, Pointer<Char> s) get stringSet =>
 void Function(Tuple2 tuple) get tuple =>
     _binding.wasi_outbound_http_tuple2_string_string_free;
 
-void Function(HttpString string) get ur => _binding.wasi_outbound_http_uri_free;
+void Function(HttpString string) get uri =>
+    _binding.wasi_outbound_http_uri_free;
