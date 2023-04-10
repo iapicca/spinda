@@ -2,120 +2,54 @@ import 'dart:ffi';
 
 import 'spin_http_bindings_generated.dart';
 
-typedef SpinHttpString = UnnamedStruct1;
-typedef SpinHttpBody = UnnamedStruct2;
-typedef SpinHttpTuple2 = UnnamedStruct3;
-typedef SpinHttpHeaders = UnnamedStruct4;
-typedef SpinHttpHeadersParams = UnnamedStruct5;
-typedef SpinHttpHeadersOptionBody = UnnamedStruct6;
-typedef SpinHttpRequest = UnnamedStruct7;
-typedef SpinHttpHeadersOptionHeaders = UnnamedStruct8;
-typedef SpinHttpResponse = UnnamedStruct9;
+typedef HttpString = Pointer<UnnamedStruct1>;
+typedef Body = Pointer<UnnamedStruct2>;
+typedef Tuple2 = Pointer<UnnamedStruct3>;
+typedef Headers = Pointer<UnnamedStruct4>;
+typedef Params = Pointer<UnnamedStruct5>;
+typedef OptionBody = Pointer<UnnamedStruct6>;
+typedef Request = Pointer<UnnamedStruct7>;
+typedef OptionHeaders = Pointer<UnnamedStruct8>;
+typedef Response = Pointer<UnnamedStruct9>;
 
-const _library = 'spin_http';
+const _dylib = 'spin_http';
 
-abstract class SpinHttp {
-  static final _binding = SpinHttpBindings(
-    DynamicLibrary.open(
-      'lib$_library.so',
-    ),
-  );
+final _binding = SpinHttpBindings(
+  DynamicLibrary.open(
+    'lib$_dylib.so',
+  ),
+);
 
-  static void body(
-    Pointer<SpinHttpBody> body,
-  ) =>
-      _binding.spin_http_body_free(
-        body,
-      );
+void Function(Body body) get body => _binding.spin_http_body_free;
 
-  static void handleRequest(
-    Pointer<SpinHttpRequest> request,
-    Pointer<SpinHttpResponse> response,
-  ) =>
-      _binding.spin_http_handle_http_request(
-        request,
-        response,
-      );
+void Function(Request request, Response response) get handleRequest =>
+    _binding.spin_http_handle_http_request;
 
-  static void headers(
-    Pointer<SpinHttpHeaders> headers,
-  ) =>
-      _binding.spin_http_headers_free(
-        headers,
-      );
+void Function(Headers headers) get headers => _binding.spin_http_headers_free;
 
-  static void optionBody(
-    Pointer<SpinHttpHeadersOptionBody> optionBody,
-  ) =>
-      _binding.spin_http_option_body_free(
-        optionBody,
-      );
+void Function(OptionBody optionBody) get optionBody =>
+    _binding.spin_http_option_body_free;
 
-  static void optionHeader(
-    Pointer<UnnamedStruct8> optionHeaders,
-  ) =>
-      _binding.spin_http_option_headers_free(
-        optionHeaders,
-      );
+void Function(OptionHeaders optionHeaders) get optionHeader =>
+    _binding.spin_http_option_headers_free;
 
-  static void optionParams(
-    Pointer<SpinHttpHeadersParams> params,
-  ) =>
-      _binding.spin_http_params_free(
-        params,
-      );
+void Function(Params params) get optionParams => _binding.spin_http_params_free;
 
-  static void request(
-    Pointer<SpinHttpRequest> request,
-  ) =>
-      _binding.spin_http_request_free(
-        request,
-      );
+void Function(Request request) get request => _binding.spin_http_request_free;
 
-  static void response(
-    Pointer<SpinHttpResponse> response,
-  ) =>
-      _binding.spin_http_response_free(
-        response,
-      );
+void Function(Response response) get response =>
+    _binding.spin_http_response_free;
 
-  /// is it duplicate?
-  static void stringDuplicate(
-    Pointer<SpinHttpString> ret,
-    Pointer<Char> s,
-  ) =>
-      _binding.spin_http_string_dup(
-        ret,
-        s,
-      );
+/// is it "duplicate"?
+void Function(HttpString ret, Pointer<Char> s) get stringDuplicate =>
+    _binding.spin_http_string_dup;
 
-  static void string(
-    Pointer<SpinHttpString> ret,
-  ) =>
-      _binding.spin_http_string_free(
-        ret,
-      );
+void Function(HttpString string) get string => _binding.spin_http_string_free;
 
-  static void stringSet(
-    Pointer<SpinHttpString> ret,
-    Pointer<Char> s,
-  ) =>
-      _binding.spin_http_string_set(
-        ret,
-        s,
-      );
+void Function(HttpString ret, Pointer<Char> s) get stringSet =>
+    _binding.spin_http_string_set;
 
-  static void tuple(
-    Pointer<SpinHttpTuple2> tuple,
-  ) =>
-      _binding.spin_http_tuple2_string_string_free(
-        tuple,
-      );
+void Function(Tuple2 tuple) get tuple =>
+    _binding.spin_http_tuple2_string_string_free;
 
-  static void uri(
-    Pointer<SpinHttpString> string,
-  ) =>
-      _binding.spin_http_uri_free(
-        string,
-      );
-}
+void Function(HttpString string) get ur => _binding.spin_http_uri_free;

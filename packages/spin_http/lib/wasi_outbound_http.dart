@@ -1,112 +1,56 @@
 import 'dart:ffi';
 
 import 'spin_http_bindings_generated.dart';
-import 'spin_http.dart' show SpinHttpTuple2;
 
-typedef WasiOutboundHttpString = UnnamedStruct10;
-typedef WasiOutboundHttpBody = UnnamedStruct11;
-typedef WasiOutboundHttpHeaders = UnnamedStruct13;
-typedef WasiOutboundHttpParams = UnnamedStruct14;
-typedef WasiOutboundHttpOptionBody = UnnamedStruct15;
-typedef WasiOutboundHttpRequest = UnnamedStruct16;
-typedef WasiOutboundHttpOptionHeaders = UnnamedStruct17;
-typedef WasiOutboundHttpResponse = UnnamedStruct18;
+typedef HttpString = Pointer<UnnamedStruct10>;
+typedef Body = Pointer<UnnamedStruct11>;
+typedef Tuple2 = Pointer<UnnamedStruct12>;
+typedef Headers = Pointer<UnnamedStruct13>;
+typedef Params = Pointer<UnnamedStruct14>;
+typedef OptionBody = Pointer<UnnamedStruct15>;
+typedef Request = Pointer<UnnamedStruct16>;
+typedef OptionHeaders = Pointer<UnnamedStruct17>;
+typedef Response = Pointer<UnnamedStruct18>;
 
 const _library = 'wasi-outbound-http';
 
-abstract class WasiOutboundHttp {
-  static final _binding = SpinHttpBindings(
-    DynamicLibrary.open(
-      'lib$_library.so',
-    ),
-  );
+final _binding = SpinHttpBindings(
+  DynamicLibrary.open(
+    'lib$_library.so',
+  ),
+);
 
-  static void body(
-    Pointer<WasiOutboundHttpBody> body,
-  ) =>
-      _binding.wasi_outbound_http_body_free(
-        body,
-      );
+void Function(Body body) get body => _binding.wasi_outbound_http_body_free;
 
-  static void headers(
-    Pointer<WasiOutboundHttpHeaders> headers,
-  ) =>
-      _binding.wasi_outbound_http_headers_free(
-        headers,
-      );
+void Function(Headers headers) get headers =>
+    _binding.wasi_outbound_http_headers_free;
 
-  static void optionBody(
-    Pointer<WasiOutboundHttpOptionBody> option,
-  ) =>
-      _binding.wasi_outbound_http_option_body_free(
-        option,
-      );
+void Function(OptionBody optionBody) get optionBody =>
+    _binding.wasi_outbound_http_option_body_free;
 
-  static void optionHeader(
-    Pointer<WasiOutboundHttpOptionHeaders> option,
-  ) =>
-      _binding.wasi_outbound_http_option_headers_free(
-        option,
-      );
+void Function(OptionHeaders optionHeaders) get optionHeader =>
+    _binding.wasi_outbound_http_option_headers_free;
 
-  static void params(
-    Pointer<WasiOutboundHttpParams> params,
-  ) =>
-      _binding.wasi_outbound_http_params_free(
-        params,
-      );
+void Function(Params params) get optionParams =>
+    _binding.wasi_outbound_http_params_free;
 
-  static void request(
-    Pointer<WasiOutboundHttpRequest> request,
-  ) =>
-      _binding.wasi_outbound_http_request_free(
-        request,
-      );
+void Function(Request request) get request =>
+    _binding.wasi_outbound_http_request_free;
 
-  static void response(
-    Pointer<WasiOutboundHttpResponse> response,
-  ) =>
-      _binding.wasi_outbound_http_response_free(
-        response,
-      );
+void Function(Response response) get response =>
+    _binding.wasi_outbound_http_response_free;
 
-  /// is it duplicate?
-  static void stringDuplicate(
-    Pointer<WasiOutboundHttpString> ret,
-    Pointer<Char> s,
-  ) =>
-      _binding.wasi_outbound_http_string_dup(
-        ret,
-        s,
-      );
+/// is it "duplicate"?
+void Function(HttpString ret, Pointer<Char> s) get stringDuplicate =>
+    _binding.wasi_outbound_http_string_dup;
 
-  static void string(
-    Pointer<WasiOutboundHttpString> ret,
-  ) =>
-      _binding.wasi_outbound_http_string_free(
-        ret,
-      );
+void Function(HttpString string) get string =>
+    _binding.wasi_outbound_http_string_free;
 
-  static void stringSet(
-    Pointer<WasiOutboundHttpString> ret,
-    Pointer<Char> s,
-  ) =>
-      _binding.wasi_outbound_http_string_set(
-        ret,
-        s,
-      );
+void Function(HttpString ret, Pointer<Char> s) get stringSet =>
+    _binding.wasi_outbound_http_string_set;
 
-  static void tuple(
-    Pointer<SpinHttpTuple2> tuple,
-  ) =>
-      _binding.spin_http_tuple2_string_string_free(
-        tuple,
-      );
+void Function(Tuple2 tuple) get tuple =>
+    _binding.wasi_outbound_http_tuple2_string_string_free;
 
-  static void uri(
-    Pointer<WasiOutboundHttpString> string,
-  ) =>
-      _binding.wasi_outbound_http_uri_free(
-        string,
-      );
-}
+void Function(HttpString string) get ur => _binding.wasi_outbound_http_uri_free;
