@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'spin_http_bindings_generated.dart';
+import 'bindings.dart';
 
 typedef HttpString = Pointer<UnnamedStruct10>;
 typedef Body = Pointer<UnnamedStruct11>;

@@ -4,7 +4,7 @@ description: |
   Bindings for `src/spin_http.h` and `'src/wasi-outbound-http.h'`.
 
   Regenerate bindings with `flutter pub run ffigen --config ffigen.yaml`.
-output: 'lib/spin_http_bindings_generated.dart'
+output: 'lib/bindings/bindings.dart'
 headers:
   entry-points:
     - 'src/spin-http.h'

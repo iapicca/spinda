@@ -1,25 +1,9 @@
 import 'dart:typed_data';
 import 'package:meta/meta.dart';
-import 'package:spin_http/helpers/all.dart';
-import '../spin_http.dart' as spin_http;
-import '../methods.dart';
 
-typedef Headers = Set<MapEntry<String, String>>;
-
-extension RequestCopyWithX on Request {
-  Request copyWith({
-    Uint8List? body,
-    Method? method,
-    Uri? uri,
-    Headers? headers,
-  }) =>
-      Request(
-        body: body ?? this.body,
-        method: method ?? this.method,
-        uri: uri ?? this.uri,
-        headers: headers ?? this.headers,
-      );
-}
+import 'all.dart';
+import '../helpers/all.dart';
+import '../bindings/spin_http.dart' as spin_http;
 
 @immutable
 class Request {
@@ -54,8 +38,23 @@ class SpinRequest extends Request {
   SpinRequest(spin_http.Request request)
       : super(
           body: request.body.toUint8List(),
-          headers: request.headers.toSet(),
+          headers: request.headers.toDart(),
           method: Method.values[request.method],
           uri: request.uri.toDartUri(),
         );
+}
+
+extension RequestCopyWithX on Request {
+  Request copyWith({
+    Uint8List? body,
+    Method? method,
+    Uri? uri,
+    Headers? headers,
+  }) =>
+      Request(
+        body: body ?? this.body,
+        method: method ?? this.method,
+        uri: uri ?? this.uri,
+        headers: headers ?? this.headers,
+      );
 }
