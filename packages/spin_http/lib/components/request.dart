@@ -37,10 +37,10 @@ class Request {
 class SpinRequest extends Request {
   SpinRequest(spin_http.Request request)
       : super(
-          body: request.body.toUint8List(),
+          body: request.body.toDart(),
           headers: request.headers.toDart(),
-          method: Method.values[request.method],
-          uri: request.uri.toDartUri(),
+          method: Method.fromIndex(request.method),
+          uri: request.uri.toDart(),
         );
 }
 

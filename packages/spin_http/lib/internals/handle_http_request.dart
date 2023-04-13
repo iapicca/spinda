@@ -1,33 +1,25 @@
-import 'dart:async';
 import 'dart:ffi';
 
-// import 'package:spin_http/response/response.dart';
 import '../components/all.dart';
 import '../bindings/spin_http.dart' as spin_http;
 import '../spin_http.dart';
-
-// import 'wasi_outbound_http.dart' as wasi_outbound_http;
 
 void handleHttpRequest(
   Pointer<spin_http.Request> req,
   Pointer<spin_http.Response> res,
 ) {
-  late final Request request;
   try {
-    request = SpinRequest(req.ref);
+    // convert [spin_http.Request] to dart's [Request]
+    final Request request = SpinRequest(req.ref);
+    final response = Response();
+    // tries calling [handleRequest] from 'spin_http.dart'
+    handleRequest(response, request);
   } catch (_) {
+    // if [spin_http.Request] fails to convert or
+    // [handleRequest] fails returns [StatusCode.internalServerError]
     res.ref.status = StatusCode.internalServerError.code;
     return;
   }
-
-  final responseAsync = Completer<Response>();
-
-  handleRequest(responseAsync, request);
-
-  responseAsync.future.then((response) {
-    res.ref.status = response.statusCode.code;
-    if (response.headers.isNotEmpty) {}
-  });
 
   // res.status = C.uint16_t(w.status)
   // if len(w.header) > 0 {

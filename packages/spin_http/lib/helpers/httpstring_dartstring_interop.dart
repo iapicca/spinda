@@ -3,11 +3,10 @@ import 'package:ffi/ffi.dart';
 
 import '../bindings/spin_http.dart';
 
-extension HttpStringToStringX on HttpString {
+extension HttpStringDartStringInteropX on HttpString {
   String toDartString() => ptr.cast<Utf8>().toDartString(length: len);
-}
 
-extension HttpStringfromStringX on HttpString {
+  /// TODO probably wrong
   void fromDartString(String string) => this
     ..len = string.length
     ..ptr = string.toNativeUtf8().cast<Char>();

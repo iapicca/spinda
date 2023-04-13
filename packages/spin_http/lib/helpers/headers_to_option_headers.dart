@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../bindings/spin_http.dart' as spin_http;
 import '../components/headers.dart' as dart;
 

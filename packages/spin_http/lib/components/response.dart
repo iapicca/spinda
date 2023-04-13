@@ -1,14 +1,17 @@
+import 'dart:typed_data';
+
 import 'package:meta/meta.dart';
 import 'all.dart';
 
-@immutable
 class Response {
-  const Response({
-    required this.statusCode,
-    this.headers = const {},
-  });
-  final StatusCode statusCode;
-  final Headers headers;
+  Response()
+      : body = Uint8List(0),
+        headers = const {},
+        statusCode = const StatusCode.internalServerError();
+
+  Headers headers;
+  StatusCode statusCode;
+  Uint8List body;
 
   @nonVirtual
   @override
@@ -17,19 +20,5 @@ class Response {
 
   @nonVirtual
   @override
-  int get hashCode => Object.hashAll([
-        statusCode,
-        headers,
-      ]);
-}
-
-extension ResponseCopyWithX on Response {
-  Response copyWith({
-    StatusCode? statusCode,
-    Headers? headers,
-  }) =>
-      Response(
-        headers: headers ?? this.headers,
-        statusCode: statusCode ?? this.statusCode,
-      );
+  int get hashCode => Object.hashAll([headers, statusCode]);
 }
