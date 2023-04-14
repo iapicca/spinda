@@ -1,14 +1,20 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
+import 'package:ffi/ffi.dart' as ffi;
 
 import '../bindings/spin_http.dart';
 
 extension HttpStringDartStringInteropX on HttpString {
-  String toDartString() => ptr.cast<Utf8>().toDartString(length: len);
+  String toDart({Allocator allocator = ffi.malloc}) {
+    // see: https://github.com/dart-lang/ffi/issues/146
+    final string = ptr.cast<ffi.Utf8>().toDartString(length: len);
+    allocator.free(ptr);
+    return string;
+  }
 
-  /// TODO probably wrong
-  /// https://github.com/iapicca/spinda/issues/3
-  void fromDartString(String string) => this
-    ..len = string.length
-    ..ptr = string.toNativeUtf8().cast<Char>();
+  /// see: https://github.com/iapicca/spinda/issues/3
+  void fromDart(
+    String string, {
+    Allocator allocator = ffi.malloc,
+  }) =>
+      ptr = string.toNativeUtf8(allocator: allocator).cast();
 }

@@ -14,11 +14,7 @@ typedef Response = UnnamedStruct9;
 
 const _dylib = 'spin_http';
 
-final _binding = SpinHttpBindings(
-  DynamicLibrary.open(
-    'lib$_dylib.so',
-  ),
-);
+final _binding = SpinHttpBindings(DynamicLibrary.open('lib$_dylib.so'));
 
 void Function(Pointer<Body> body) get body => _binding.spin_http_body_free;
 

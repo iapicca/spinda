@@ -20,19 +20,4 @@ void handleHttpRequest(
     res.ref.status = StatusCode.internalServerError.code;
     return;
   }
-
-  // res.status = C.uint16_t(w.status)
-  // if len(w.header) > 0 {
-  // 	res.headers = C.spin_http_option_headers_t{
-  // 		is_some: true,
-  // 		val:     toSpinHeaders(w.header),
-  // 	}
-  // } else {
-  // 	res.headers = C.spin_http_option_headers_t{is_some: false}
-  // }
-
-  // res.body, err = toSpinBody(w.w)
-  // if err != nil {
-  // 	fmt.Fprintln(os.Stderr, err)
-  // }
 }

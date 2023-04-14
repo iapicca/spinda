@@ -40,7 +40,7 @@ class SpinRequest extends Request {
           body: request.body.toDart(),
           headers: request.headers.toDart(),
           method: Method.fromIndex(request.method),
-          uri: request.uri.toDart(),
+          uri: Uri.parse(request.uri.toDart()),
         );
 }
 

@@ -1,1 +1,1 @@
-typedef Headers = Set<MapEntry<String, String>>;
+typedef Headers = Map<String, String>;

@@ -14,11 +14,7 @@ typedef Response = Pointer<UnnamedStruct18>;
 
 const _library = 'wasi-outbound-http';
 
-final _binding = SpinHttpBindings(
-  DynamicLibrary.open(
-    'lib$_library.so',
-  ),
-);
+final _binding = SpinHttpBindings(DynamicLibrary.open('lib$_library.so'));
 
 void Function(Body body) get body => _binding.wasi_outbound_http_body_free;
 
