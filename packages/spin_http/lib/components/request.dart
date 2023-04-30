@@ -3,7 +3,8 @@ import 'package:meta/meta.dart';
 
 import 'all.dart';
 import '../helpers/all.dart';
-import '../bindings/spin_http.dart' as spin_http;
+import '../bindings/spin_http.dart' as spin;
+import '../bindings/wasi_outbound_http.dart' as wasi;
 
 @immutable
 class Request {
@@ -35,7 +36,17 @@ class Request {
 }
 
 class SpinRequest extends Request {
-  SpinRequest(spin_http.Request request)
+  SpinRequest(spin.Request request)
+      : super(
+          body: request.body.toDart(),
+          headers: request.headers.toDart(),
+          method: Method.fromIndex(request.method),
+          uri: Uri.parse(request.uri.toDart()),
+        );
+}
+
+class WasiRequest extends Request {
+  WasiRequest(wasi.Request request)
       : super(
           body: request.body.toDart(),
           headers: request.headers.toDart(),
